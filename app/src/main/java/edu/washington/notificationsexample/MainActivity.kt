@@ -45,11 +45,17 @@ class MainActivity : AppCompatActivity() {
 
     fun displayNotificationExpanded(v: View) {
 
+        // Intent for when the notification is tapped
+        val intent = Intent(this, MainActivity::class.java)
+
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
         // Build and show a notification with extra content
         val notification = NotificationCompat.Builder(this, "basic")
             .setSmallIcon(android.R.drawable.ic_menu_add)
             .setContentTitle("Title 2")
             .setContentText("Content Text")
+            .setContentIntent(pendingIntent)
             .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.picture_icon))
             .setStyle(NotificationCompat.BigTextStyle().bigText("hello hello hello hello"))
 
