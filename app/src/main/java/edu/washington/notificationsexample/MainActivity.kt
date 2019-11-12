@@ -39,7 +39,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun displayNotificationSimple(v: View) {
+
         val builder = buildBasicNotification()
+
+        // Add an action button that can reset the notification count
+
         showBasicNotification(builder)
     }
 
@@ -66,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         // Build and show a notification with action buttons that can
         // launch MainActivity and SecondActivity
 
+        // Intent for when the "button" notification is pressed
         val intent = Intent(this, SecondActivity::class.java)
 
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
@@ -77,8 +82,6 @@ class MainActivity : AppCompatActivity() {
             .addAction(android.R.drawable.ic_menu_add, "Button", pendingIntent )
             .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.picture_icon))
             .setStyle(NotificationCompat.BigTextStyle().bigText("hi hi hi hi"))
-
-        // Add an action button that can reset the notification count
 
         showBasicNotification(notification)
 
@@ -94,10 +97,26 @@ class MainActivity : AppCompatActivity() {
     private fun buildBasicNotification(): NotificationCompat.Builder {
         totalNotifications++
 
+        val intentReset = Intent("reset")
+        val pendingIntentReset = PendingIntent.getBroadcast(this, 0, intentReset, 0)
+
+        val receiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (intent?.action.equals("reset")) {
+                    totalNotifications = 0
+                }
+            }
+        }
+
+        val filter = IntentFilter("reset")
+
+        registerReceiver(receiver, filter)
+
         var builder = NotificationCompat.Builder(this, "basic")
             .setSmallIcon(android.R.drawable.ic_menu_add)
             .setContentTitle("Basic Notification Title")
             .setContentText(totalNotifications.toString())
+            .addAction(android.R.drawable.ic_menu_add, "Reset", pendingIntentReset)
             .setAutoCancel(true)
 
         return builder
