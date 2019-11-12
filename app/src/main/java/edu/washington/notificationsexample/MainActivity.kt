@@ -42,9 +42,8 @@ class MainActivity : AppCompatActivity() {
 
         val builder = buildBasicNotification()
 
-        // Add an action button that can reset the notification count
-
         showBasicNotification(builder)
+
     }
 
     fun displayNotificationExpanded(v: View) {
@@ -97,6 +96,7 @@ class MainActivity : AppCompatActivity() {
     private fun buildBasicNotification(): NotificationCompat.Builder {
         totalNotifications++
 
+        // Add an action button that can reset the notification count
         val intentReset = Intent("reset")
         val pendingIntentReset = PendingIntent.getBroadcast(this, 0, intentReset, 0)
 
