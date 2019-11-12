@@ -51,9 +51,9 @@ class MainActivity : AppCompatActivity() {
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
         // Build and show a notification with extra content
-        val notification = NotificationCompat.Builder(this, "basic")
+        val notification = NotificationCompat.Builder(this, "expanded")
             .setSmallIcon(android.R.drawable.ic_menu_add)
-            .setContentTitle("Title 2")
+            .setContentTitle("Expanded Notification Title")
             .setContentText("Content Text")
             .setContentIntent(pendingIntent)
             .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.picture_icon))
@@ -66,7 +66,22 @@ class MainActivity : AppCompatActivity() {
         // Build and show a notification with action buttons that can
         // launch MainActivity and SecondActivity
 
+        val intent = Intent(this, SecondActivity::class.java)
+
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
+        val notification = NotificationCompat.Builder(this, "actions")
+            .setSmallIcon(android.R.drawable.ic_menu_add)
+            .setContentTitle("Action Notification Title")
+            .setContentText("Content Text")
+            .addAction(android.R.drawable.ic_menu_add, "Button", pendingIntent )
+            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.picture_icon))
+            .setStyle(NotificationCompat.BigTextStyle().bigText("hi hi hi hi"))
+
         // Add an action button that can reset the notification count
+
+        showBasicNotification(notification)
+
     }
 
     private fun addNotificationsForAirplaneMode() {
@@ -81,7 +96,7 @@ class MainActivity : AppCompatActivity() {
 
         var builder = NotificationCompat.Builder(this, "basic")
             .setSmallIcon(android.R.drawable.ic_menu_add)
-            .setContentTitle("Title")
+            .setContentTitle("Basic Notification Title")
             .setContentText(totalNotifications.toString())
             .setAutoCancel(true)
 
