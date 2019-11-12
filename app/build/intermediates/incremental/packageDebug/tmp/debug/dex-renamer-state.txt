@@ -1,0 +1,7 @@
+#Tue Nov 12 11:08:56 PST 2019
+base.0=/Users/linh/Desktop/UW/INFO448/NotificationsExampleStarter/app/build/intermediates/dex/debug/mergeExtDexDebug/out/classes.dex
+path.1=classes.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=/Users/linh/Desktop/UW/INFO448/NotificationsExampleStarter/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex

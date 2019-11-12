@@ -18,6 +18,7 @@ import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.IntentFilter
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.core.app.ComponentActivity.ExtraData
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
@@ -45,6 +46,14 @@ class MainActivity : AppCompatActivity() {
     fun displayNotificationExpanded(v: View) {
 
         // Build and show a notification with extra content
+        val notification = NotificationCompat.Builder(this, "basic")
+            .setSmallIcon(android.R.drawable.ic_menu_add)
+            .setContentTitle("Title 2")
+            .setContentText("Content Text")
+            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.picture_icon))
+            .setStyle(NotificationCompat.BigTextStyle().bigText("hello hello hello hello"))
+
+        showBasicNotification(notification)
     }
 
     fun displayNotificationWithActions(v: View) {
